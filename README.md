@@ -23,6 +23,8 @@ In a microservice architecture, updating configurations (e.g., application.prope
 
 Implement a configuration server connected to a GitHub repository. This repository would store the configuration files. When updates are needed, simply modify the configuration file, commit, and push the changes to the repository. This streamlined process eliminates the need for additional steps like creating PRs and redeploying the microservice.
 
+When you do the config server is so important that you do this with a new propertye file called bootstrap.properties, the config reads first this file before application.properties.
+
 
 ![Config Server](Config-Server-Diagram.png)
 
@@ -33,5 +35,19 @@ Implement a configuration server connected to a GitHub repository. This reposito
 
  Once you implemented config server you need to configurate microservices.
  You need to add
- /actuaror/refresh
- @RefreshScope
+ **Springboot Actuator**
+ In essence, Actuator brings production-ready features to our application.Monitoring our app, gathering metrics, and understanding traffic or the state of our database becomes trivial with this dependency.
+ **@RefreshScope** 
+ this anotation will be in a controller endpoint, so when you call this endpoint, the configuration file will update.
+ 
+ In your bootstrap.properties you need to add this annotation:
+ management.endpoints.web.exposure.include=*
+ with this you can refresh configurations.
+ Then if you did some change in the configuration files and you want that the microservice X update the configuration you need to call this endpint:
+ http:..../actuator/refresh
+ This automaticatly refresh all configuration variables on your microservice.
+ you can automate this last part you can implement a message broker that listening the changes and update the microservices.
+
+# 3- Vault
+
+A way to manage credentials 
