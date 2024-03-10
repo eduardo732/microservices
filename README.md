@@ -50,4 +50,16 @@ When you do the config server is so important that you do this with a new proper
 
 # 3- Vault
 
-A way to manage credentials 
+ Secure, store, and tightly control access to tokens, passwords, certificates, and encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
+ https://www.vaultproject.io/
+
+ - Download vault
+ - Add to Path Variables
+ - Open vault file folder 
+ - Open terminal
+ - Check documentation.
+
+
+# 4- Message Broker, Refresh Configuration, RabbitMQ, Docker
+
+ ![Message Broker](Message-Broker.png)
