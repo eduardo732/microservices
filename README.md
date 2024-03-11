@@ -1,4 +1,5 @@
 # Microservices
+
 Implementation an example of manage microservices architecture
 
 To run these microservice:
@@ -30,45 +31,58 @@ Implement a configuration server connected to a GitHub repository. This reposito
 
 When you do the config server is so important that you do this with a new propertye file called bootstrap.properties, the config reads first this file before application.properties.
 
-
 ![Config Server](Config-Server-Diagram.png)
 
- Link repo files configurations: https://github.com/eduardo732/service-configuration
- If you want to see the config server just open /config-server folder
+Link repo files configurations: https://github.com/eduardo732/service-configuration
+If you want to see the config server just open /config-server folder
 
- ### Refresh configuration
+### Refresh configuration
 
- Once you implemented config server you need to configurate microservices.
- You need to add
- **Springboot Actuator**
- In essence, Actuator brings production-ready features to our application.Monitoring our app, gathering metrics, and understanding traffic or the state of our database becomes trivial with this dependency.
- **@RefreshScope** 
- this anotation will be in a controller endpoint, so when you call this endpoint, the configuration file will update.
- 
- In your bootstrap.properties you need to add this annotation:
- management.endpoints.web.exposure.include=*
- with this you can refresh configurations.
- Then if you did some change in the configuration files and you want that the microservice X update the configuration you need to call this endpint:
- http:..../actuator/refresh
- This automaticatly refresh all configuration variables on your microservice.
- you can automate this last part you can implement a message broker that listening the changes and update the microservices.
+Once you implemented config server you need to configurate microservices.
+You need to add
+**Springboot Actuator**
+In essence, Actuator brings production-ready features to our application.Monitoring our app, gathering metrics, and understanding traffic or the state of our database becomes trivial with this dependency.
+**@RefreshScope**
+this anotation will be in a controller endpoint, so when you call this endpoint, the configuration file will update.
+
+In your bootstrap.properties you need to add this annotation:
+management.endpoints.web.exposure.include=\*
+with this you can refresh configurations.
+Then if you did some change in the configuration files and you want that the microservice X update the configuration you need to call this endpint:
+http:..../actuator/refresh
+This automaticatly refresh all configuration variables on your microservice.
+you can automate this last part you can implement a message broker that listening the changes and update the microservices.
 
 # 3- Vault
 
- Secure, store, and tightly control access to tokens, passwords, certificates, and encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
- https://www.vaultproject.io/
+Secure, store, and tightly control access to tokens, passwords, certificates, and encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
+https://www.vaultproject.io/
 
- - Download vault
- - Add to Path Variables
- - Open vault file folder 
- - Open terminal
- - Check documentation.
-
+- Download vault
+- Add to Path Variables
+- Open vault file folder
+- Open terminal
+- Check documentation.
 
 # 4- Message Broker, Refresh Configuration, RabbitMQ, Docker
 
- ![Message Broker](Message-Broker.png)
+![Message Broker](Message-Broker.png)
 
- Mainly you need this message broker to refresh automatically your configurations on your microservices.
+Mainly you need this message broker to refresh automatically your configurations on your microservices.
 
- to update all your configs on your microservices, you need to call to Config Server on /actuator/busrefresh and then your microservices will be update.
+to update all your configs on your microservices, you need to call to Config Server on /actuator/busrefresh and then your microservices will be update.
+
+# 5- API Gateway
+
+- Intercept every call from clients and it rotues to specific microservice
+- You can implement authentication and authorization
+- Monitoring
+- Limit speed of api calls
+
+![Api Gateway](api-gateway.png)
+
+You need to configurate your api-gateway properties with these configurations:
+(Example)
+spring.cloud.gateway.routes[0].id=product-microservice --> An id to identify your microservice
+spring.cloud.gateway.routes[0].uri=lb://PRODUCT-MICROSERVICE --> lb=loadbalancer and the name in the EUREKA SERVER in this case is PRODUCT-MICROSERVICE
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/products/.., /api/categories/.. --> All routes in your api, inside cloud gateway it is called predicates
