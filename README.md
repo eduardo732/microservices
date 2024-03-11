@@ -70,3 +70,5 @@ When you do the config server is so important that you do this with a new proper
  ![Message Broker](Message-Broker.png)
 
  Mainly you need this message broker to refresh automatically your configurations on your microservices.
+
+ to update all your configs on your microservices, you need to call to Config Server on /actuator/busrefresh and then your microservices will be update.
