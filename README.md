@@ -83,6 +83,7 @@ to update all your configs on your microservices, you need to call to Config Ser
 
 You need to configurate your api-gateway properties with these configurations:
 (Example)
-spring.cloud.gateway.routes[0].id=product-microservice --> An id to identify your microservice
-spring.cloud.gateway.routes[0].uri=lb://PRODUCT-MICROSERVICE --> lb=loadbalancer and the name in the EUREKA SERVER in this case is PRODUCT-MICROSERVICE
-spring.cloud.gateway.routes[0].predicates[0]=Path=/api/products/.., /api/categories/.. --> All routes in your api, inside cloud gateway it is called predicates
+
+- spring.cloud.gateway.routes[0].id=product-microservice --> An id to identify your microservice
+- spring.cloud.gateway.routes[0].uri=lb://PRODUCT-MICROSERVICE --> lb=loadbalancer and the name in the EUREKA SERVER in this case is PRODUCT-MICROSERVICE
+- spring.cloud.gateway.routes[0].predicates[0]=Path=/api/products/.., /api/categories/.. --> All routes in your api, inside cloud gateway it is called predicates
