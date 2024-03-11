@@ -1,6 +1,11 @@
 # Microservices
 Implementation an example of manage microservices architecture
 
+To run these microservice:
+1- First you need to run your eureka server in the project Discovery-Server.
+2- You need to run your config server
+3- You need to run your microservices
+
 # 1- Implementing a Discovery Server
 
 **Problem:**
@@ -63,3 +68,5 @@ When you do the config server is so important that you do this with a new proper
 # 4- Message Broker, Refresh Configuration, RabbitMQ, Docker
 
  ![Message Broker](Message-Broker.png)
+
+ Mainly you need this message broker to refresh automatically your configurations on your microservices.
