@@ -2,6 +2,8 @@
 
 Implementation an example of manage microservices architecture
 
+In this project I implemented just point 1,2,3 and 5
+
 To run these microservice:
 1- First you need to run your eureka server in the project Discovery-Server.
 2- You need to run your config server
@@ -110,3 +112,19 @@ https://www.youtube.com/watch?v=7gMQYCvTd8c&list=PL145AyWAbMDhwUbBL74s1D2ZV9EqBa
 	-spring.security.oauth2.client.registration.spring-cloud-gateway-client-authorization-grand-type={auth from keycloack}
 	-spring.security.oauth2.client.registration.spring-cloud-gateway-client.redirec-uri={your url that happen when the auth is success}
 -Add Security Configuration in your microservice
+-Now in your product/booking microservice you need to add oauth2-resource-server dependency
+- Add oauth2-jose dependency too
+- Add springboot starter security dependency
+- now you configure bootstrap.properties
+	-spring.security.oauth2.resourceserver.jwt.issuer.uri={keycloackserver issuer}
+	-add SecurityConfigurationClass on your code
+
+# 7- Circuit Breaker Pattern
+
+It's a way to manage microservices calls, when you do a request and the microservice is off or it gives an error or whatever, you need to manage these situations. Solution **Circuit Breaker**
+
+Hystrix/Resilience4j --> solutions
+
+
+
+
