@@ -92,6 +92,8 @@ You need to configurate your api-gateway properties with these configurations:
 
 You can add this security layer into your api gateway... go to keycloak.org and follow the instructions...
 
+https://www.youtube.com/watch?v=7gMQYCvTd8c&list=PL145AyWAbMDhwUbBL74s1D2ZV9EqBaQ1t&index=9
+
 - Pull and download docker server keycloack
 - Start your keycloack server
 - You need to configurate your realm
