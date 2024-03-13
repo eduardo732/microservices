@@ -87,3 +87,24 @@ You need to configurate your api-gateway properties with these configurations:
 - spring.cloud.gateway.routes[0].id=product-microservice --> An id to identify your microservice
 - spring.cloud.gateway.routes[0].uri=lb://PRODUCT-MICROSERVICE --> lb=loadbalancer and the name in the EUREKA SERVER in this case is PRODUCT-MICROSERVICE
 - spring.cloud.gateway.routes[0].predicates[0]=Path=/api/products/.., /api/categories/.. --> All routes in your api, inside cloud gateway it is called predicates
+
+# 6- Authentication and Authorization KEYCLOACK
+
+You can add this security layer into your api gateway... go to keycloak.org and follow the instructions...
+
+- Pull and download docker server keycloack
+- Start your keycloack server
+- You need to configurate your realm
+- Create a client --> example spring-cloud-gateway-client
+- Finish to configurate your client
+- You copu the secret keycloack
+- Add an user
+- You add some dependencies to your api gateway service(Spring cloud starter security, Springboot starter OAuth2-client)
+- Add configurations into application.properties
+	-spring.security.oauth2.client.provider.keycloack.issuer-uri=urlKeycloackIssuer
+	-spring.security.oauth2.client.registration.spring-cloud-gateway-client.client-id={cleintId From Keycloack}
+	-spring.security.oauth2.client.registration.spring-cloud-gateway-client.client-secret={clientSecret From Keycloack}
+	-spring.security.oauth2.client.registration.spring-cloud-gateway-client.provider=keycloack
+	-spring.security.oauth2.client.registration.spring-cloud-gateway-client-authorization-grand-type={auth from keycloack}
+	-spring.security.oauth2.client.registration.spring-cloud-gateway-client.redirec-uri={your url that happen when the auth is success}
+-Add Security Configuration in your microservice
